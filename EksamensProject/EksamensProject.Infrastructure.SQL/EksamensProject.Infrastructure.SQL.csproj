@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Repositories" />
+      <ProjectReference Include="..\EksamensProject.Core\EksamensProject.Core.csproj" />
     </ItemGroup>
 
 </Project>

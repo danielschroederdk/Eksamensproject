@@ -6,7 +6,10 @@
 
     <ItemGroup>
       <Folder Include="ApplicationService\Implementation" />
-      <Folder Include="DomainService" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\EksamensProject.Core.Entity\EksamensProject.Core.Entity.csproj" />
     </ItemGroup>
 
 </Project>

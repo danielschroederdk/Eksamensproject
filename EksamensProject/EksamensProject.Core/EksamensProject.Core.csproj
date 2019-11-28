@@ -5,10 +5,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="ApplicationService\Implementation" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\EksamensProject.Core.Entity\EksamensProject.Core.Entity.csproj" />
     </ItemGroup>
 

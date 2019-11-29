@@ -24,7 +24,6 @@ namespace EksamensProject.Core.ApplicationService.Implementation
                 Year = dateTime,
                 Tempo = tempo
             };
-            IsNullOrEmpty.Check(newComposition);
             _compositionRepository.Create(newComposition);
             return newComposition;
         }

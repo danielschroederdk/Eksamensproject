@@ -7,7 +7,9 @@ namespace EksamensProject.Core.Entity
         public UserValidator()
         {
             RuleFor(User => User.Name).NotEmpty()
-                .Matches("^[a-zA-Z0-9 ]*$");
+                .Matches("^[a-zA-Z -]*$");
+            RuleFor(User => User.Email).NotEmpty().NotNull();
+
         }
         
     }

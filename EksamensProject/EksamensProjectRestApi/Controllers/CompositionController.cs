@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using EksamensProject.Core.ApplicationService;
 using EksamensProject.Core.Entity;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -42,7 +41,7 @@ namespace EksamensProjectRestApi.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(404, $"owner {id} not found");
+                return StatusCode(404, $"Composition {id} not found");
             }
         }
 
@@ -72,7 +71,7 @@ namespace EksamensProjectRestApi.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public ActionResult<User> Delete(int id)
+        public ActionResult<Composition> Delete(int id)
         {
             var toRemove = _compositionService.Delete(id);
             return toRemove == null ? StatusCode(404, $"Composition {id}  not found") : Ok($"Composition: {toRemove.Name} (ID: {id}) deleted");

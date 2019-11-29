@@ -1,4 +1,6 @@
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace EksamensProject.Core.Entity
 {
@@ -6,8 +8,6 @@ namespace EksamensProject.Core.Entity
     {
         public int Id { get; set; }
         public String Name { get; set; }
-        public String EMail { get; set; }
-        
-        
+        public String Email { get; set; }
     }
 }

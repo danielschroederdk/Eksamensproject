@@ -6,10 +6,10 @@ namespace EksamensProject.Core.DomainService
     public interface ICompositionRepository
     {
         Composition Create(Composition composition);
-        Composition ReadByID(int ID);
+        Composition ReadById(int id);
         IEnumerable<Composition> ReadAll();
         Composition Update(Composition compositionUpdate);
-        Composition Delete(int ID);
+        Composition Delete(int id);
     }
     
 }

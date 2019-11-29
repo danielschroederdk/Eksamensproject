@@ -11,7 +11,7 @@ namespace EksamensProject.Infrastructure.SQL.Repositories
             throw new System.NotImplementedException();
         }
 
-        public Composition ReadByID(int ID)
+        public Composition ReadById(int ID)
         {
             throw new System.NotImplementedException();
         }

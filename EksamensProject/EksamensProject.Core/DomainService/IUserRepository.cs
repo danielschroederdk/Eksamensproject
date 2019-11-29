@@ -8,7 +8,7 @@ namespace EksamensProject.Core.DomainService
         User Create(User user);
         User ReadByID(int id);
         IEnumerable<User> ReadAll();
-        User Update(Composition userUpdate);
+        User Update(User userUpdate);
         User Delete(int id);
         
         

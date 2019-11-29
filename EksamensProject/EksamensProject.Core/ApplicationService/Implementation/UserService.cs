@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using EksamensProject.Core.DomainService;
 using EksamensProject.Core.Entity;
@@ -32,17 +33,21 @@ namespace EksamensProject.Core.ApplicationService.Implementation
 
         public User FindUserById(int id)
         {
-            throw new NotImplementedException();
+            return _userRepository.ReadByID(id) == null
+                ? throw new InvalidDataException("User not found")
+                : _userRepository.ReadByID(id);
         }
 
         public User Delete(int id)
         {
-            throw new NotImplementedException();
+            return FindUserById(id) == null
+                ? throw new InvalidDataException("User not found or already deleted")
+                : _userRepository.Delete(id);
         }
 
         public User UpdateUser(User userUpdate)
         {
-            throw new NotImplementedException();
+            return _userRepository.Update(userUpdate);
         }
 
         public List<User> GetUsers()

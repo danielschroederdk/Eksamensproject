@@ -45,7 +45,11 @@ namespace EksamensProjectRestApi
                 {
                     opt.Filters.Add<ValidationFilter>();
                 })
-                .AddFluentValidation(mvcConfig => mvcConfig.RegisterValidatorsFromAssemblyContaining<UserValidator>())
+                .AddFluentValidation(mvcConfig =>
+                {
+                    mvcConfig.RegisterValidatorsFromAssemblyContaining<UserValidator>();
+                    mvcConfig.RegisterValidatorsFromAssemblyContaining<CompositionValidator>();
+                })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             
             if (Enviroment.IsDevelopment())

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using EksamensProject.Core.DomainService;
 using EksamensProject.Core.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace EksamensProject.Infrastructure.SQL.Repositories
 {
@@ -22,7 +23,7 @@ namespace EksamensProject.Infrastructure.SQL.Repositories
 
         public User ReadByID(int id)
         {
-            throw new System.NotImplementedException();
+            return _ctx.Users.FirstOrDefault(u => u.Id == id);
         }
 
         public IEnumerable<User> ReadAll()
@@ -30,14 +31,19 @@ namespace EksamensProject.Infrastructure.SQL.Repositories
             return _ctx.Users.ToList();        
         }
 
-        public User Update(Composition userUpdate)
+        public User Update(User userUpdate)
         {
-            throw new System.NotImplementedException();
+            _ctx.Entry(userUpdate).State = EntityState.Modified;
+            _ctx.SaveChanges();
+            return userUpdate;
         }
 
         public User Delete(int id)
         {
-            throw new System.NotImplementedException();
+            var userToDelete = ReadByID(id);
+            _ctx.Users.Remove(userToDelete);
+            _ctx.SaveChanges();
+            return userToDelete;
         }
     }
 }

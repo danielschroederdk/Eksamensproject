@@ -75,7 +75,7 @@ namespace EksamensProjectRestApi.Controllers
         public ActionResult<User> Delete(int id)
         {
             var toRemove = _userService.Delete(id);
-            return toRemove == null ? StatusCode(404, $"user {id}  not found") : Ok($"{id} deleted");
+            return toRemove == null ? StatusCode(404, $"user {id}  not found") : Ok($"User: {toRemove.Name} (ID: {id}) deleted");
         }
     }
 }

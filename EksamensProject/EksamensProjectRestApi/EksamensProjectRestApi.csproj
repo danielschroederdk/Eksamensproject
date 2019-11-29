@@ -5,7 +5,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers" />
+      <ProjectReference Include="..\EksamensProject.Core\EksamensProject.Core.csproj" />
+      <ProjectReference Include="..\EksamensProject.Infrastructure.SQL\EksamensProject.Infrastructure.SQL.csproj" />
     </ItemGroup>
 
 </Project>

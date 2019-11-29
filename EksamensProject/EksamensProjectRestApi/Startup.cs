@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EksamensProject.Core.ApplicationService;
 using EksamensProject.Core.ApplicationService.Implementation;
 using EksamensProject.Core.DomainService;
+using EksamensProject.Core.Entity;
 using EksamensProject.Core.Entity.Filters;
 using EksamensProject.Infrastructure.SQL;
 using EksamensProject.Infrastructure.SQL.Repositories;
@@ -44,7 +45,7 @@ namespace EksamensProjectRestApi
                 {
                     opt.Filters.Add<ValidationFilter>();
                 })
-                .AddFluentValidation(mvcConfig => mvcConfig.RegisterValidatorsFromAssemblyContaining<Startup>())
+                .AddFluentValidation(mvcConfig => mvcConfig.RegisterValidatorsFromAssemblyContaining<UserValidator>())
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             
             if (Enviroment.IsDevelopment())

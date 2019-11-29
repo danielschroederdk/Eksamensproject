@@ -1,34 +1,46 @@
 using System.Collections.Generic;
+using System.Linq;
 using EksamensProject.Core.DomainService;
 using EksamensProject.Core.Entity;
+using Microsoft.EntityFrameworkCore;
 
 namespace EksamensProject.Infrastructure.SQL.Repositories
 {
     public class CompositionRepository : ICompositionRepository
     {
+        readonly EksamensProjectContext _ctx;
+
         public Composition Create(Composition composition)
         {
-            throw new System.NotImplementedException();
+            _ctx.Add(composition);
+            _ctx.SaveChanges();
+            return composition;        
         }
 
-        public Composition ReadById(int ID)
+        public Composition ReadById(int id)
         {
-            throw new System.NotImplementedException();
+            return _ctx.Compositions.FirstOrDefault(c => c.Id == id);
         }
 
         public IEnumerable<Composition> ReadAll()
         {
-            throw new System.NotImplementedException();
+            return _ctx.Compositions.ToList();        
         }
 
         public Composition Update(Composition compositionUpdate)
         {
-            throw new System.NotImplementedException();
+            _ctx.Entry(compositionUpdate).State = EntityState.Modified;
+            _ctx.SaveChanges();
+            return compositionUpdate;
+            
         }
 
-        public Composition Delete(int ID)
+        public Composition Delete(int id)
         {
-            throw new System.NotImplementedException();
+            var compositionToDelete = ReadById(id);
+            _ctx.Compositions.Remove(compositionToDelete);
+            _ctx.SaveChanges();
+            return compositionToDelete;        
         }
     }
 }

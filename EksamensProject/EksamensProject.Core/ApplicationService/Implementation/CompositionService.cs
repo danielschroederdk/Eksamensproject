@@ -1,14 +1,15 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using EksamensProject.Core.DomainService;
 using EksamensProject.Core.Entity;
-using FluentValidation.Results;
 
 namespace EksamensProject.Core.ApplicationService.Implementation
 {
     public class CompositionService : ICompositionService
     {
-        private readonly ICompositionRepository _compositionRepository;
+        readonly ICompositionRepository _compositionRepository;
 
         public CompositionService(ICompositionRepository compositionRepository)
         {
@@ -30,27 +31,30 @@ namespace EksamensProject.Core.ApplicationService.Implementation
 
         public Composition CreateComposition(Composition composition)
         {
-            throw new NotImplementedException();
+            return _compositionRepository.Create(composition);
         }
 
         public Composition FindCompositionById(int id)
         {
-            throw new NotImplementedException();
+            return _compositionRepository.ReadById(id) == null
+                ? throw new InvalidDataException("Composition not found")
+                : _compositionRepository.ReadById(id);        
         }
 
         public Composition Delete(int id)
         {
-            throw new NotImplementedException();
-        }
+            return FindCompositionById(id) == null
+                ? throw new InvalidDataException("User not found or already deleted")
+                : _compositionRepository.Delete(id);        }
 
         public Composition UpdateComposition(Composition compositionUpdate)
         {
-            throw new NotImplementedException();
+            return _compositionRepository.Update(compositionUpdate);
         }
 
         public List<Composition> GetCompositions()
         {
-            throw new NotImplementedException();
+            return _compositionRepository.ReadAll().ToList();
         }
     }
 }

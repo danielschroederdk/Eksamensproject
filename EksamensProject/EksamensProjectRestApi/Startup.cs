@@ -46,6 +46,14 @@ namespace EksamensProjectRestApi
             services.AddScoped<ICompositionRepository, CompositionRepository>();
             services.AddScoped<ICompositionService, CompositionService>();
             
+            // Review injected
+            services.AddScoped<IReviewRepository, ReviewRepository>();
+            services.AddScoped<IReviewService, ReviewService>();
+            
+            // Request injected
+            services.AddScoped<IRequestRepository, RequestRepository>();
+            services.AddScoped<IRequestService, RequestService>();
+            
             services.AddMvc(opt =>
                 {
                     opt.Filters.Add<ValidationFilter>();

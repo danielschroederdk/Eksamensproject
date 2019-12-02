@@ -10,6 +10,11 @@ namespace EksamensProject.Infrastructure.SQL.Repositories
     {
         readonly EksamensProjectContext _ctx;
 
+        public CompositionRepository(EksamensProjectContext ctx)
+        {
+            _ctx = ctx;
+        }
+
         public Composition Create(Composition composition)
         {
             _ctx.Add(composition);

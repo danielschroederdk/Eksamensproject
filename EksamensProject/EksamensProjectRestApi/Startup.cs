@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -54,6 +55,10 @@ namespace EksamensProjectRestApi
             services.AddScoped<IRequestRepository, RequestRepository>();
             services.AddScoped<IRequestService, RequestService>();
             
+            // DbInitialized 
+            services.AddTransient<IDbInitializer, DbInitializer>();
+
+            
             services.AddMvc(opt =>
                 {
                     opt.Filters.Add<ValidationFilter>();
@@ -78,23 +83,31 @@ namespace EksamensProjectRestApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (Enviroment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 using (var scope = app.ApplicationServices.CreateScope())
                 {
-                    var ctx = scope.ServiceProvider.GetService<EksamensProjectContext>();
-                    ctx.Database.EnsureDeleted();
-                    ctx.Database.EnsureCreated();
+                    /*
+                    var ctx = scope.ServiceProvider.GetRequiredService<EksamensProjectContext>();
+                    var dbInitializer = ctx.GetService<IDbInitializer>();
+                    dbInitializer.Initialize(ctx);
+                    */
+                    
+                    var services = scope.ServiceProvider;
+                    var dbContext = services.GetService<EksamensProjectContext>();
+                    var dbInitializer = services.GetService<IDbInitializer>();
+                    dbInitializer.Initialize(dbContext);
+                    
+                    
                 }
             }
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
             //app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });

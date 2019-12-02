@@ -19,6 +19,8 @@ namespace EksamensProject.Infrastructure.SQL
             modelBuilder.Entity<User>()
                 .HasMany(user => user.Requests)
                 .WithOne(request => request.User);
+            
+            //add style relation
         }
         
         public DbSet<User> Users { get; set; }

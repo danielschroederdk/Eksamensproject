@@ -9,5 +9,7 @@ namespace EksamensProject.Core.Entity
         public DateTime Year { get; set; }
         public Double Duration { get; set; }
         public Tempo Tempo { get; set; }
+        public Style Style { get; set; }
+        
     }
 }

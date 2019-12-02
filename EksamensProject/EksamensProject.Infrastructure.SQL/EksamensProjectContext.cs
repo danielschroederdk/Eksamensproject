@@ -25,6 +25,9 @@ namespace EksamensProject.Infrastructure.SQL
         
         public DbSet<User> Users { get; set; }
         public DbSet<Composition> Compositions { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Request> Requests { get; set; }
+
 
     }
 }

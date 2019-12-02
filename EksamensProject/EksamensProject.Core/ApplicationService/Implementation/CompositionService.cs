@@ -25,6 +25,7 @@ namespace EksamensProject.Core.ApplicationService.Implementation
                 Year = dateTime,
                 Tempo = tempo
             };
+                
             _compositionRepository.Create(newComposition);
             return newComposition;
         }
@@ -45,7 +46,8 @@ namespace EksamensProject.Core.ApplicationService.Implementation
         {
             return FindCompositionById(id) == null
                 ? throw new InvalidDataException("User not found or already deleted")
-                : _compositionRepository.Delete(id);        }
+                : _compositionRepository.Delete(id);
+        }
 
         public Composition UpdateComposition(Composition compositionUpdate)
         {

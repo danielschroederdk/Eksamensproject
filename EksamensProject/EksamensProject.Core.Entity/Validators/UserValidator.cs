@@ -6,10 +6,11 @@ namespace EksamensProject.Core.Entity
     {
         public UserValidator()
         {
-            RuleFor(User => User.Name).NotEmpty()
+            RuleFor(user => user.Name).NotEmpty()
                 .Matches("^[a-zA-Z -]*$");
-            RuleFor(User => User.Email).NotEmpty().NotNull();
+            RuleFor(user => user.Email).NotEmpty().NotNull();
         }
+        
         
     }
 }

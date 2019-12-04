@@ -21,7 +21,7 @@ namespace EksamensProject.Infrastructure.SQL.Repositories
             return user;
         }
 
-        public User ReadByID(int id)
+        public User ReadById(int id)
         {
             return _ctx.Users.FirstOrDefault(u => u.Id == id);
         }
@@ -40,7 +40,7 @@ namespace EksamensProject.Infrastructure.SQL.Repositories
 
         public User Delete(int id)
         {
-            var userToDelete = ReadByID(id);
+            var userToDelete = ReadById(id);
             _ctx.Users.Remove(userToDelete);
             _ctx.SaveChanges();
             return userToDelete;

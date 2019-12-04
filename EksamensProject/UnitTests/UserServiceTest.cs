@@ -18,7 +18,7 @@ namespace UnitTests
         private readonly UserValidator _validator = new UserValidator();
 
         [Theory]
-        [InlineData("Max", "max@uldahl.com")]
+        [InlineData("Max", "max@example.com")]
         public void CreateNewUserWorking_Test(string name, string email)
         {
             var userRepo = new Mock<IUserRepository>();
@@ -42,14 +42,13 @@ namespace UnitTests
             IUserService service = new UserService(userRepo.Object);
             
             var user = service.CreateNewUser(name, email);
-            
             var result = _validator.TestValidate(user);
             
             result.ShouldHaveValidationErrorFor(user => user.Email);
         }
         
         [Theory]
-        [InlineData("", "max@uldahl.dk")]
+        [InlineData("", "max@example.com")]
         public void CreateNewUserMissingNameThrowException(string name, string email)
         {
             var userRepo = new Mock<IUserRepository>();
@@ -62,7 +61,7 @@ namespace UnitTests
         }
         
         [Theory]
-        [InlineData("1234", "max@uldahl.dk")]
+        [InlineData("1234", "max@example.com")]
         public void CreateNewUserInvalidNameThrowException(string name, string email)
         {
             var userRepo = new Mock<IUserRepository>();
@@ -75,7 +74,7 @@ namespace UnitTests
         }
         
         [Theory]
-        [InlineData("Max", "max@uldahl.dk")]
+        [InlineData("Max", "max@example.com")]
         public void CreateNewUserShouldCallUserRepoOnce(string name, string email)
         {
             var userRepo = new Mock<IUserRepository>();

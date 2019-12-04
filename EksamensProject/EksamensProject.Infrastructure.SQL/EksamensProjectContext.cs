@@ -12,9 +12,11 @@ namespace EksamensProject.Infrastructure.SQL
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            
             modelBuilder.Entity<User>()
                 .HasMany(user => user.Reviews)
                 .WithOne(review => review.User);
+            
             
             modelBuilder.Entity<User>()
                 .HasMany(user => user.Requests)

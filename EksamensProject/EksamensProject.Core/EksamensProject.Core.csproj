@@ -8,4 +8,8 @@
       <ProjectReference Include="..\EksamensProject.Core.Entity\EksamensProject.Core.Entity.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Moq" Version="4.13.1" />
+    </ItemGroup>
+
 </Project>

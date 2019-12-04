@@ -6,7 +6,7 @@ namespace EksamensProject.Core.ApplicationService
 {
     public interface IReviewService
     {
-        Review CreateNewReview(User user, String header, String body);
+        Review CreateNewReview(int userId, String header, String body);
         Review CreateReview(Review review);
         Review FindReviewById(int id);
         Review Delete(int id);

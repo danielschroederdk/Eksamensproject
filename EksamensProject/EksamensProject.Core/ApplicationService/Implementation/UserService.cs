@@ -33,9 +33,9 @@ namespace EksamensProject.Core.ApplicationService.Implementation
 
         public User FindUserById(int id)
         {
-            return _userRepository.ReadByID(id) == null
+            return _userRepository.ReadById(id) == null
                 ? throw new InvalidDataException("User not found")
-                : _userRepository.ReadByID(id);
+                : _userRepository.ReadById(id);
         }
 
         public User Delete(int id)

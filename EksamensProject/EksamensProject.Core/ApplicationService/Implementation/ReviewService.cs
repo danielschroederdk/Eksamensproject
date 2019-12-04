@@ -9,14 +9,17 @@ namespace EksamensProject.Core.ApplicationService.Implementation
     public class ReviewService : IReviewService
     {
         readonly IReviewRepository _reviewRepository;
+        readonly IUserRepository _userRepository;
 
-        public ReviewService(IReviewRepository reviewRepository)
+        public ReviewService(IReviewRepository reviewRepository, IUserRepository userRepository)
         {
             _reviewRepository = reviewRepository;
+            _userRepository = userRepository;
         }
 
-        public Review CreateNewReview(User user, string header, string body)
+        public Review CreateNewReview(int userId, string header, string body)
         {
+            var user = _userRepository.ReadById(userId);
             var newReview = new Review()
             {
                 User = user,

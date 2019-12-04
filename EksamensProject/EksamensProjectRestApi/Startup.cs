@@ -67,6 +67,9 @@ namespace EksamensProjectRestApi
                 {
                     mvcConfig.RegisterValidatorsFromAssemblyContaining<UserValidator>();
                     mvcConfig.RegisterValidatorsFromAssemblyContaining<CompositionValidator>();
+                    mvcConfig.RegisterValidatorsFromAssemblyContaining<RequestValidator>();
+                    mvcConfig.RegisterValidatorsFromAssemblyContaining<ReviewValidator>();
+
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             

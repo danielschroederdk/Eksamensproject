@@ -27,8 +27,8 @@ namespace UnitTests
             var user = service.CreateNewUser(name, email);
             var result = _validator.TestValidate(user);
             
-            result.ShouldNotHaveValidationErrorFor(user => user.Name);
-            result.ShouldNotHaveValidationErrorFor(user => user.Email);
+            result.ShouldNotHaveValidationErrorFor(u => u.Name);
+            result.ShouldNotHaveValidationErrorFor(u => u.Email);
 
             Assert.Equal(user.Name, name);
             Assert.Equal(user.Email,email);
@@ -44,7 +44,7 @@ namespace UnitTests
             var user = service.CreateNewUser(name, email);
             var result = _validator.TestValidate(user);
             
-            result.ShouldHaveValidationErrorFor(user => user.Email);
+            result.ShouldHaveValidationErrorFor(u => u.Email);
         }
         
         [Theory]
@@ -57,7 +57,7 @@ namespace UnitTests
             var user = service.CreateNewUser(name, email);
             var result = _validator.TestValidate(user);
             
-            result.ShouldHaveValidationErrorFor(user => user.Name);
+            result.ShouldHaveValidationErrorFor(u => u.Name);
         }
         
         [Theory]
@@ -83,7 +83,34 @@ namespace UnitTests
             service.CreateNewUser(name, email);
             
             userRepo.Verify(x => x.Create(It.IsAny<User>()), Times.Once);
+        }
 
+        [Fact]
+        public void FindUserByIdUserFound()
+        {
+            var userRepo = new Mock<IUserRepository>();
+            IUserService service = new UserService(userRepo.Object);
+
+            
+            var user = new User()
+            {
+                Id = 1, 
+                Name = "Max",
+                Email = "max@example.com"
+            };
+
+            var userCreated = service.CreateUser(user);
+            var userFound = service.FindUserById(1);
+            
+            Assert.Same(userCreated, userFound);
+        }
+        
+        public void ReadUserByIdUserNotFoundThrowError(int Id)
+        {
+            var userRepo = new Mock<IUserRepository>();
+ 
+            userRepo.Setup(x => x.ReadById(It.IsAny<int>()))
+                .Returns(new User(){Id = 1});
         }
     }
 }

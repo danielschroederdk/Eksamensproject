@@ -58,7 +58,14 @@ namespace EksamensProjectRestApi
             // DbInitialized 
             services.AddTransient<IDbInitializer, DbInitializer>();
 
-            
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowSpecificOrigin",
+                    builder => builder
+                        //.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
+                        .WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod()
+                );
+            });
             services.AddMvc(opt =>
                 {
                     opt.Filters.Add<ValidationFilter>();
@@ -88,6 +95,8 @@ namespace EksamensProjectRestApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
+            app.UseCors("AllowSpecificOrigin");
+
             if (Enviroment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

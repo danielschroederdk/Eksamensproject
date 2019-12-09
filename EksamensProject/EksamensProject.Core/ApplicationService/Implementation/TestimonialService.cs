@@ -6,21 +6,21 @@ using EksamensProject.Core.Entity;
 
 namespace EksamensProject.Core.ApplicationService.Implementation
 {
-    public class ReviewService : IReviewService
+    public class TestimonialService : ITestimonialService
     {
-        readonly IReviewRepository _reviewRepository;
+        readonly ITestimonialRepository _reviewRepository;
         readonly IUserRepository _userRepository;
 
-        public ReviewService(IReviewRepository reviewRepository, IUserRepository userRepository)
+        public TestimonialService(ITestimonialRepository reviewRepository, IUserRepository userRepository)
         {
             _reviewRepository = reviewRepository;
             _userRepository = userRepository;
         }
 
-        public Review CreateNewReview(int userId, string header, string body)
+        public Testimonial CreateNewReview(int userId, string header, string body)
         {
             var user = _userRepository.ReadById(userId);
-            var newReview = new Review()
+            var newReview = new Testimonial()
             {
                 User = user,
                 ReviewHeader = header,
@@ -31,30 +31,30 @@ namespace EksamensProject.Core.ApplicationService.Implementation
             return newReview;
         }
         
-        public Review CreateReview(Review review)
+        public Testimonial CreateReview(Testimonial review)
         {
             return _reviewRepository.Create(review);
         }
 
-        public Review FindReviewById(int id)
+        public Testimonial FindReviewById(int id)
         {
             return _reviewRepository.ReadById(id) == null
                 ? throw new InvalidDataException("Review not found")
                 : _reviewRepository.ReadById(id);           }
 
-        public Review Delete(int id)
+        public Testimonial Delete(int id)
         {
             return FindReviewById(id) == null
                 ? throw new InvalidDataException("Review not found or already deleted")
                 : _reviewRepository.Delete(id);
         }
 
-        public Review UpdateReview(Review reviewUpdate)
+        public Testimonial UpdateReview(Testimonial reviewUpdate)
         {
             return _reviewRepository.Update(reviewUpdate);
         }
 
-        public List<Review> GetReviews()
+        public List<Testimonial> GetReviews()
         {
             return _reviewRepository.ReadAll().ToList();
         }

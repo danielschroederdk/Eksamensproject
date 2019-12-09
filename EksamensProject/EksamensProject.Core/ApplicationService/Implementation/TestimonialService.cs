@@ -23,8 +23,8 @@ namespace EksamensProject.Core.ApplicationService.Implementation
             var newReview = new Testimonial()
             {
                 User = user,
-                ReviewHeader = header,
-                ReviewBody = body
+                TestimonialHeader = header,
+                TestimonialBody = body
             };
             
             _reviewRepository.Create(newReview);

@@ -37,15 +37,15 @@ namespace EksamensProject.Infrastructure.SQL
             var testimonial = new Testimonial()
             {
                 User = admin,
-                ReviewHeader = "Excellent",
-                ReviewBody = "NICE"
+                TestimonialHeader = "Excellent",
+                TestimonialBody = "NICE"
             };
             
             var testimonial2 = new Testimonial()
             {
                 User = user,
-                ReviewHeader = "Excellent",
-                ReviewBody = "NICE"
+                TestimonialHeader = "Excellent",
+                TestimonialBody = "NICE"
             };
             context.Users.Add(admin);
             context.Compositions.Add(composition);

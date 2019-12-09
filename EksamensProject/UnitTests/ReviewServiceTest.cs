@@ -32,9 +32,9 @@ namespace UnitTests
             var review = reviewService.CreateNewReview(1, "", "dolor sit amet");
 
             var result = _validator.TestValidate(review);
-            result.ShouldHaveValidationErrorFor(u => u.ReviewHeader);
+            result.ShouldHaveValidationErrorFor(u => u.TestimonialHeader);
             result.ShouldNotHaveValidationErrorFor(u => u.User);
-            result.ShouldNotHaveValidationErrorFor(u => u.ReviewBody);
+            result.ShouldNotHaveValidationErrorFor(u => u.TestimonialBody);
 
         }
         [Fact]
@@ -51,14 +51,14 @@ namespace UnitTests
             var review = new Testimonial()
             {
                 User = new User(){Id = 1},
-                ReviewBody = "dolor sit amet"
+                TestimonialBody = "dolor sit amet"
             };
             reviewService.CreateReview(review);
             
             var result = _validator.TestValidate(review);
-            result.ShouldHaveValidationErrorFor(u => u.ReviewHeader);
+            result.ShouldHaveValidationErrorFor(u => u.TestimonialHeader);
             result.ShouldNotHaveValidationErrorFor(u => u.User);
-            result.ShouldNotHaveValidationErrorFor(u => u.ReviewBody);
+            result.ShouldNotHaveValidationErrorFor(u => u.TestimonialBody);
 
         }
         [Fact]
@@ -75,14 +75,14 @@ namespace UnitTests
             var review = new Testimonial()
             {
                 User = new User(){Id = 1},
-                ReviewHeader = "lorem ipsum"
+                TestimonialHeader = "lorem ipsum"
             };
             reviewService.CreateReview(review);
             
             var result = _validator.TestValidate(review);
-            result.ShouldNotHaveValidationErrorFor(u => u.ReviewHeader);
+            result.ShouldNotHaveValidationErrorFor(u => u.TestimonialHeader);
             result.ShouldNotHaveValidationErrorFor(u => u.User);
-            result.ShouldHaveValidationErrorFor(u => u.ReviewBody);
+            result.ShouldHaveValidationErrorFor(u => u.TestimonialBody);
         }
         
     }

@@ -6,7 +6,7 @@ namespace EksamensProject.Core.Entity
     {
         public int Id { get; set; }
         public User User { get; set; }
-        public String ReviewHeader { get; set; }
-        public String ReviewBody { get; set; }
+        public String TestimonialHeader { get; set; }
+        public String TestimonialBody { get; set; }
     }
 }

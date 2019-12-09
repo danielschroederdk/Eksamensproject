@@ -12,8 +12,31 @@ namespace UnitTests
 {
     public class ReviewServiceTest
     {
+        private readonly ITestOutputHelper _testOutputHelper;
         private readonly ReviewValidator _validator = new ReviewValidator();
 
+        public ReviewServiceTest(ITestOutputHelper testOutputHelper)
+        {
+            _testOutputHelper = testOutputHelper;
+        }
+        [Fact]
+        public void CreateNewReviewWithHeaderMissingThrowsException2()
+        {
+            var userRepo = new Mock<IUserRepository>();
+            var reviewRepo = new Mock<ITestimonialRepository>();
+            ITestimonialService reviewService = new TestimonialService(reviewRepo.Object, userRepo.Object);
+
+            userRepo.Setup(x => x.ReadById(It.IsAny<int>()))
+                .Returns(new User(){Id = 1});
+            
+            var review = reviewService.CreateNewReview(1, "", "dolor sit amet");
+
+            var result = _validator.TestValidate(review);
+            result.ShouldHaveValidationErrorFor(u => u.ReviewHeader);
+            result.ShouldNotHaveValidationErrorFor(u => u.User);
+            result.ShouldNotHaveValidationErrorFor(u => u.ReviewBody);
+
+        }
         [Fact]
         public void CreateNewReviewWithHeaderMissingThrowsException()
         {
@@ -21,11 +44,11 @@ namespace UnitTests
             userRepo.Setup(x => x.ReadById(It.IsAny<int>()))
                .Returns(new User(){Id = 1});
             
-            var reviewRepo = new Mock<IReviewRepository>();
+            var reviewRepo = new Mock<ITestimonialRepository>();
             
-            IReviewService reviewService = new ReviewService(reviewRepo.Object, userRepo.Object);
+            ITestimonialService reviewService = new TestimonialService(reviewRepo.Object, userRepo.Object);
             
-            var review = new Review()
+            var review = new Testimonial()
             {
                 User = new User(){Id = 1},
                 ReviewBody = "dolor sit amet"
@@ -39,17 +62,17 @@ namespace UnitTests
 
         }
         [Fact]
-        public void C2reateNewReviewWithBodyMissingThrowsException()
+        public void CreateNewReviewWithBodyMissingThrowsException()
         {
             var userRepo = new Mock<IUserRepository>();
             userRepo.Setup(x => x.ReadById(It.IsAny<int>()))
                 .Returns(new User(){Id = 1});
             
-            var reviewRepo = new Mock<IReviewRepository>();
+            var reviewRepo = new Mock<ITestimonialRepository>();
             
-            IReviewService reviewService = new ReviewService(reviewRepo.Object, userRepo.Object);
+            ITestimonialService reviewService = new TestimonialService(reviewRepo.Object, userRepo.Object);
             
-            var review = new Review()
+            var review = new Testimonial()
             {
                 User = new User(){Id = 1},
                 ReviewHeader = "lorem ipsum"

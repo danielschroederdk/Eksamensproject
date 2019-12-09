@@ -18,6 +18,12 @@ namespace EksamensProject.Infrastructure.SQL
                 Name = "Max",
                 Email = "max@uldahl.dk"
             };
+            
+            var user = new User()
+            {
+                Name = "Thomas",
+                Email = "thomas@example.dk"
+            };
 
             var composition = new Composition()
             {
@@ -27,8 +33,24 @@ namespace EksamensProject.Infrastructure.SQL
                 Tempo = null,
                 Year = DateTime.Now
             };
+            
+            var testimonial = new Testimonial()
+            {
+                User = admin,
+                ReviewHeader = "Excellent",
+                ReviewBody = "NICE"
+            };
+            
+            var testimonial2 = new Testimonial()
+            {
+                User = user,
+                ReviewHeader = "Excellent",
+                ReviewBody = "NICE"
+            };
             context.Users.Add(admin);
             context.Compositions.Add(composition);
+            context.Reviews.Add(testimonial);
+            context.Reviews.Add(testimonial2);
             context.SaveChanges();
 
         }

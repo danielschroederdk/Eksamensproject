@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace EksamensProject.Core.Entity
 {
-    public class ReviewValidator : AbstractValidator<Review>
+    public class ReviewValidator : AbstractValidator<Testimonial>
     {
         public ReviewValidator()
         {

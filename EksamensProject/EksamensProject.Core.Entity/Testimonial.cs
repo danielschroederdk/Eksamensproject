@@ -2,7 +2,7 @@ using System;
 
 namespace EksamensProject.Core.Entity
 {
-    public class Review
+    public class Testimonial
     {
         public int Id { get; set; }
         public User User { get; set; }

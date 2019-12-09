@@ -48,8 +48,8 @@ namespace EksamensProjectRestApi
             services.AddScoped<ICompositionService, CompositionService>();
             
             // Review injected
-            services.AddScoped<IReviewRepository, ReviewRepository>();
-            services.AddScoped<IReviewService, ReviewService>();
+            services.AddScoped<ITestimonialRepository, TestimonialRepository>();
+            services.AddScoped<ITestimonialService, TestimonialService>();
             
             // Request injected
             services.AddScoped<IRequestRepository, RequestRepository>();

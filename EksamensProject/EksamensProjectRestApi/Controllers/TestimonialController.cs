@@ -9,17 +9,17 @@ namespace EksamensProjectRestApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReviewController : ControllerBase
+    public class TestimonialController : ControllerBase
     {
-        private readonly IReviewService _reviewService;
+        private readonly ITestimonialService _reviewService;
 
-        public ReviewController(IReviewService reviewService)
+        public TestimonialController(ITestimonialService reviewService)
         {
             _reviewService = reviewService;
         }
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<Review>> Get()
+        public ActionResult<IEnumerable<Testimonial>> Get()
         {
             try
             {
@@ -33,7 +33,7 @@ namespace EksamensProjectRestApi.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<Review> Get(int id)
+        public ActionResult<Testimonial> Get(int id)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace EksamensProjectRestApi.Controllers
 
         // POST api/values
         [HttpPost]
-        public ActionResult<Review> Post([FromBody] Review review)
+        public ActionResult<Testimonial> Post([FromBody] Testimonial review)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace EksamensProjectRestApi.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public ActionResult<Review> Put(int id, [FromBody] Review review)
+        public ActionResult<Testimonial> Put(int id, [FromBody] Testimonial review)
         {
             if (id != review.Id)
                 return BadRequest("ID does not coincide");
@@ -71,7 +71,7 @@ namespace EksamensProjectRestApi.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public ActionResult<Review> Delete(int id)
+        public ActionResult<Testimonial> Delete(int id)
         {
             var toRemove = _reviewService.Delete(id);
             return toRemove == null ? StatusCode(404, $"Request {id}  not found") : Ok($"Request: (ID: {id}) deleted");

@@ -6,41 +6,41 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EksamensProject.Infrastructure.SQL.Repositories
 {
-    public class ReviewRepository : IReviewRepository
+    public class TestimonialRepository : ITestimonialRepository
     {
         readonly EksamensProjectContext _ctx;
 
-        public ReviewRepository(EksamensProjectContext ctx)
+        public TestimonialRepository(EksamensProjectContext ctx)
         {
             _ctx = ctx;
         }
 
 
-        public Review Create(Review review)
+        public Testimonial Create(Testimonial review)
         {
             _ctx.Add(review);
             _ctx.SaveChanges();
             return review;
         }
 
-        public Review ReadById(int id)
+        public Testimonial ReadById(int id)
         {
             return _ctx.Reviews.FirstOrDefault(c => c.Id == id);
         }
 
-        public IEnumerable<Review> ReadAll()
+        public IEnumerable<Testimonial> ReadAll()
         {
             return _ctx.Reviews.ToList();        
         }
 
-        public Review Update(Review reviewUpdate)
+        public Testimonial Update(Testimonial reviewUpdate)
         {
             _ctx.Entry(reviewUpdate).State = EntityState.Modified;
             _ctx.SaveChanges();
             return reviewUpdate;
         }
 
-        public Review Delete(int id)
+        public Testimonial Delete(int id)
         {
             var reviewToDelete = ReadById(id);
             _ctx.Reviews.Remove(reviewToDelete);

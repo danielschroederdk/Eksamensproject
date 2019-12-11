@@ -25,12 +25,12 @@ namespace EksamensProject.Infrastructure.SQL.Repositories
 
         public Testimonial ReadById(int id)
         {
-            return _ctx.Reviews.FirstOrDefault(c => c.Id == id);
+            return _ctx.Testimonials.Include(t => t.User).FirstOrDefault(c => c.Id == id);
         }
 
         public IEnumerable<Testimonial> ReadAll()
         {
-            return _ctx.Reviews.ToList();        
+            return _ctx.Testimonials.Include(t => t.User).ToList();        
         }
 
         public Testimonial Update(Testimonial reviewUpdate)
@@ -43,7 +43,7 @@ namespace EksamensProject.Infrastructure.SQL.Repositories
         public Testimonial Delete(int id)
         {
             var reviewToDelete = ReadById(id);
-            _ctx.Reviews.Remove(reviewToDelete);
+            _ctx.Testimonials.Remove(reviewToDelete);
             _ctx.SaveChanges();
             return reviewToDelete;
         }

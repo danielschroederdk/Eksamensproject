@@ -20,7 +20,7 @@ namespace UnitTests
             _testOutputHelper = testOutputHelper;
         }
         [Fact]
-        public void CreateNewReviewWithHeaderMissingThrowsException2()
+        public void CreateNewTestimonialWithHeaderMissingThrowsException2()
         {
             var userRepo = new Mock<IUserRepository>();
             var reviewRepo = new Mock<ITestimonialRepository>();
@@ -38,7 +38,7 @@ namespace UnitTests
 
         }
         [Fact]
-        public void CreateNewReviewWithHeaderMissingThrowsException()
+        public void CreateNewTestimonialWithHeaderMissingThrowsException()
         {
             var userRepo = new Mock<IUserRepository>();
             userRepo.Setup(x => x.ReadById(It.IsAny<int>()))
@@ -62,7 +62,7 @@ namespace UnitTests
 
         }
         [Fact]
-        public void CreateNewReviewWithBodyMissingThrowsException()
+        public void CreateNewTestimonialWithBodyMissingThrowsException()
         {
             var userRepo = new Mock<IUserRepository>();
             userRepo.Setup(x => x.ReadById(It.IsAny<int>()))

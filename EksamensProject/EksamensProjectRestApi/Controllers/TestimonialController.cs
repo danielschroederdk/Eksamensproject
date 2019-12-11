@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using EksamensProject.Core.ApplicationService;
 using EksamensProject.Core.Entity;
+using EksamensProjectRestApi.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -19,11 +20,23 @@ namespace EksamensProjectRestApi.Controllers
         }
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<Testimonial>> Get()
+        public ActionResult<IEnumerable<TestimonialDTO>> Get()
         {
             try
             {
-                return _reviewService.GetReviews();
+                var list = _reviewService.GetReviews();
+                var newList = new List<TestimonialDTO>();
+
+                foreach (var testimonial in list)
+                {
+                    newList.Add(new TestimonialDTO()
+                    {
+                        UserName = testimonial.User.Name,
+                        TestimonialHeader = testimonial.TestimonialHeader,
+                        TestimonialBody = testimonial.TestimonialBody
+                    });
+                }
+                return Ok(newList);
             }
             catch (Exception e)
             {
@@ -35,9 +48,17 @@ namespace EksamensProjectRestApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<Testimonial> Get(int id)
         {
+            if (id < 1) return BadRequest("Id must be greater then 0");
+            var testimonial = _reviewService.FindReviewById(id);
+            
             try
             {
-               return Ok(_reviewService.FindReviewById(id));
+                return Ok(new TestimonialDTO()
+               {
+                   UserName = testimonial.User.Name,
+                   TestimonialHeader = testimonial.TestimonialHeader,
+                   TestimonialBody = testimonial.TestimonialBody
+               });
             }
             catch (Exception e)
             {

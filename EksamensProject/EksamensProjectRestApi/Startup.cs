@@ -20,6 +20,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace EksamensProjectRestApi
@@ -39,6 +40,9 @@ namespace EksamensProjectRestApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+           
+            services.AddControllers().AddNewtonsoftJson();
+            
             // User injected
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserService>();
@@ -79,6 +83,14 @@ namespace EksamensProjectRestApi
 
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+
+
+            // Limiting reference loop
+            services.AddMvc().AddNewtonsoftJson(opt =>
+            {
+                opt.SerializerSettings.MaxDepth = 3;
+                opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
             
             if (Enviroment.IsDevelopment())
             {
@@ -90,6 +102,7 @@ namespace EksamensProjectRestApi
                 services.AddDbContext<EksamensProjectContext>(opt =>
                     opt.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
             }
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

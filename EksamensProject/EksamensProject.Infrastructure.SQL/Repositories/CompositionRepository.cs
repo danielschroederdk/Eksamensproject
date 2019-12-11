@@ -24,7 +24,7 @@ namespace EksamensProject.Infrastructure.SQL.Repositories
 
         public Composition ReadById(int id)
         {
-            return _ctx.Compositions.FirstOrDefault(c => c.Id == id);
+            return _ctx.Compositions.Include(i => i.Style).Include(i => i.Tempo).FirstOrDefault(c => c.Id == id);
         }
 
         public IEnumerable<Composition> ReadAll()

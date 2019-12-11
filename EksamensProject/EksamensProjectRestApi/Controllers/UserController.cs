@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using EksamensProject.Core.ApplicationService;
 using EksamensProject.Core.Entity;
+using EksamensProjectRestApi.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,11 +21,23 @@ namespace EksamensProjectRestApi.Controllers
         }
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<User>> Get()
+        public ActionResult<IEnumerable<AllUsersDTO>> Get()
         {
             try
             {
-                return _userService.GetUsers();
+                var list = _userService.GetUsers();
+                var newList = new List<AllUsersDTO>();
+
+                foreach (var user in list)
+                {
+                    newList.Add(new AllUsersDTO()
+                    {
+                        Id = user.Id,
+                        Name = user.Name,
+                        Email = user.Email
+                    });
+                }
+                return newList;
             }
             catch (Exception e)
             {

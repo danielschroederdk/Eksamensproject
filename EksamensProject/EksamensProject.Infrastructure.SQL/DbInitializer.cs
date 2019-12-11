@@ -25,12 +25,25 @@ namespace EksamensProject.Infrastructure.SQL
                 Email = "thomas@example.dk"
             };
 
+            var style = new Style()
+            {
+                Era = "New time",
+                Name = "Wauw"
+            };
+            
+            var tempo = new Tempo()
+            {
+                TempoMarking = TempoMarking.Adagietto,
+                TimeSignature = TimeSignature.FourFour,
+                BeatsPerMinute = 40
+            };
+            
             var composition = new Composition()
             {
                 Duration = 1.1,
                 Name = "Yay",
-                Style = null,
-                Tempo = null,
+                Style = style,
+                Tempo = tempo,
                 Year = DateTime.Now
             };
             
@@ -47,10 +60,21 @@ namespace EksamensProject.Infrastructure.SQL
                 TestimonialHeader = "Excellent",
                 TestimonialBody = "NICE"
             };
+            
+            var request = new Request()
+            {
+                User = user,
+                RequestHeader = "Classical music for movie",
+                RequestBody = "New danish movie about..."
+                
+            };
+            
+            // Adding
             context.Users.Add(admin);
             context.Compositions.Add(composition);
-            context.Reviews.Add(testimonial);
-            context.Reviews.Add(testimonial2);
+            context.Testimonials.Add(testimonial);
+            context.Testimonials.Add(testimonial2);
+            context.Requests.Add(request);
             context.SaveChanges();
 
         }

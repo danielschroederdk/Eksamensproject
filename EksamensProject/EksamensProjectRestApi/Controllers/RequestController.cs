@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using EksamensProject.Core.ApplicationService;
 using EksamensProject.Core.Entity;
+using EksamensProjectRestApi.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -19,11 +20,22 @@ namespace EksamensProjectRestApi.Controllers
         }
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<Request>> Get()
+        public ActionResult<IEnumerable<AllRequestDTO>> Get()
         {
             try
             {
-                return _requestService.GetRequests();
+                var list = _requestService.GetRequests();
+                var newList = new List<AllRequestDTO>();
+
+                foreach (var request in list)
+                {
+                    newList.Add(new AllRequestDTO()
+                    {
+                        Id = request.Id,
+                        RequestHeader = request.RequestHeader
+                    });
+                }
+                return Ok(newList);
             }
             catch (Exception e)
             {
@@ -33,11 +45,19 @@ namespace EksamensProjectRestApi.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public ActionResult<Request> Get(int id)
+        public ActionResult<RequestDTO> Get(int id)
         {
             try
-            {
-               return Ok(_requestService.FindRequestById(id));
+            { 
+                var request = _requestService.FindRequestById(id);
+                
+               return Ok(new RequestDTO()
+               {
+                   Id = request.Id,
+                   userId = request.User.Id,
+                   RequestHeader = request.RequestHeader,
+                   RequestBody = request.RequestBody
+               });
             }
             catch (Exception e)
             {

@@ -24,7 +24,7 @@ namespace EksamensProject.Infrastructure.SQL.Repositories
 
         public Request ReadById(int id)
         {
-            return _ctx.Requests.FirstOrDefault(c => c.Id == id);
+            return _ctx.Requests.Include(i => i.User).FirstOrDefault(c => c.Id == id);
         }
 
         public IEnumerable<Request> ReadAll()

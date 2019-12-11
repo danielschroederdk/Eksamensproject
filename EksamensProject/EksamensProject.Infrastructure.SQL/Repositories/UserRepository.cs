@@ -23,7 +23,7 @@ namespace EksamensProject.Infrastructure.SQL.Repositories
 
         public User ReadById(int id)
         {
-            return _ctx.Users.FirstOrDefault(u => u.Id == id);
+            return _ctx.Users.Include(i => i.Testimonials).Include(i => i.Requests).FirstOrDefault(u => u.Id == id);
         }
 
         public IEnumerable<User> ReadAll()

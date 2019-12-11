@@ -14,22 +14,28 @@ namespace EksamensProject.Infrastructure.SQL
         {
             
             modelBuilder.Entity<User>()
-                .HasMany(user => user.Reviews)
-                .WithOne(review => review.User);
-            
+                .HasMany(user => user.Testimonials)
+                .WithOne(testimonial => testimonial.User);
             
             modelBuilder.Entity<User>()
                 .HasMany(user => user.Requests)
                 .WithOne(request => request.User);
+
+            modelBuilder.Entity<Composition>()
+                .HasOne(c => c.Style);
             
+            modelBuilder.Entity<Composition>()
+                .HasOne(c => c.Tempo);
+
+          
+
             //add style relation
         }
         
         public DbSet<User> Users { get; set; }
         public DbSet<Composition> Compositions { get; set; }
-        public DbSet<Testimonial> Reviews { get; set; }
+        public DbSet<Testimonial> Testimonials { get; set; }
         public DbSet<Request> Requests { get; set; }
-
 
     }
 }

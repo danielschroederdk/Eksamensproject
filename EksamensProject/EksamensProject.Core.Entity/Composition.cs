@@ -10,6 +10,6 @@ namespace EksamensProject.Core.Entity
         public Double Duration { get; set; }
         public Tempo Tempo { get; set; }
         public Style Style { get; set; }
-        
+        public String URL { get; set; }
     }
 }

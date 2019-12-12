@@ -44,7 +44,8 @@ namespace EksamensProject.Infrastructure.SQL
                 Name = "Yay",
                 Style = style,
                 Tempo = tempo,
-                Year = DateTime.Now
+                Year = DateTime.Now,
+                URL = "https://www.mboxdrive.com/Heaven%20&%20Hell.mp3"
             };
             
             var testimonial = new Testimonial()

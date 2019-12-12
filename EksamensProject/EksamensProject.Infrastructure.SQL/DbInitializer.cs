@@ -44,8 +44,10 @@ namespace EksamensProject.Infrastructure.SQL
                 Name = "Yay",
                 Style = style,
                 Tempo = tempo,
-                Year = DateTime.Now,
-                URL = "https://www.mboxdrive.com/Heaven%20&%20Hell.mp3"
+                Year = "2012",
+                URL = "https://www.mboxdrive.com/Heaven%20&%20Hell.mp3",
+                PictureURL = "https://i.ibb.co/JdftBvn/fuldmaane.jpg",
+                Comment = "Epic and adventurous composition"
             };
 
             var composition2 = new Composition()
@@ -53,9 +55,10 @@ namespace EksamensProject.Infrastructure.SQL
                 Name = "Someone Is Watching",
                 Style = style,
                 Tempo = tempo,
-                Year = DateTime.Now,
+                Year = "2012",
                 URL = "https://www.mboxdrive.com/Someone%20Is%20Watching.mp3",
-                PictureURL = "https://i.ibb.co/JdftBvn/fuldmaane.jpg"
+                PictureURL = "https://i.ibb.co/JdftBvn/fuldmaane.jpg",
+                Comment = "Suspenseful orchestration"
             };
             
             var testimonial = new Testimonial()

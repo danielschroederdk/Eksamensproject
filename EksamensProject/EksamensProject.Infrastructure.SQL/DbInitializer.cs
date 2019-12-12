@@ -47,6 +47,16 @@ namespace EksamensProject.Infrastructure.SQL
                 Year = DateTime.Now,
                 URL = "https://www.mboxdrive.com/Heaven%20&%20Hell.mp3"
             };
+
+            var composition2 = new Composition()
+            {
+                Name = "Someone Is Watching",
+                Style = style,
+                Tempo = tempo,
+                Year = DateTime.Now,
+                URL = "https://www.mboxdrive.com/Someone%20Is%20Watching.mp3",
+                PictureURL = "https://i.ibb.co/JdftBvn/fuldmaane.jpg"
+            };
             
             var testimonial = new Testimonial()
             {
@@ -73,6 +83,7 @@ namespace EksamensProject.Infrastructure.SQL
             // Adding
             context.Users.Add(admin);
             context.Compositions.Add(composition);
+            context.Compositions.Add(composition2);
             context.Testimonials.Add(testimonial);
             context.Testimonials.Add(testimonial2);
             context.Requests.Add(request);

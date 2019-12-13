@@ -23,12 +23,10 @@ namespace EksamensProjectRestApi.Controllers
         // GET api/values
         [HttpGet]
         [Authorize]
-        public ActionResult<IEnumerable<User>> Get()
+        public ActionResult<IEnumerable<AllUsersDTO>> Get()
         {
             try
             {
-                return _userService.GetUsers();
-                /*
                 var list = _userService.GetUsers();
                 var newList = new List<AllUsersDTO>();
 
@@ -42,7 +40,6 @@ namespace EksamensProjectRestApi.Controllers
                     });
                 }
                 return newList;
-                */
             }
             catch (Exception e)
             {
@@ -52,6 +49,7 @@ namespace EksamensProjectRestApi.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
+        [Authorize]
         public ActionResult<User> Get(int id)
         {
             try

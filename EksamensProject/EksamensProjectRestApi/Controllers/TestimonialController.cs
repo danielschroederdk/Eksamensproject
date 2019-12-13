@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using EksamensProject.Core.ApplicationService;
 using EksamensProject.Core.Entity;
 using EksamensProjectRestApi.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -68,6 +69,7 @@ namespace EksamensProjectRestApi.Controllers
 
         // POST api/values
         [HttpPost]
+        [Authorize]
         public ActionResult<Testimonial> Post([FromBody] Testimonial review)
         {
             try
@@ -82,6 +84,7 @@ namespace EksamensProjectRestApi.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
+        [Authorize]
         public ActionResult<Testimonial> Put(int id, [FromBody] Testimonial review)
         {
             if (id != review.Id)
@@ -92,6 +95,7 @@ namespace EksamensProjectRestApi.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult<Testimonial> Delete(int id)
         {
             var toRemove = _reviewService.Delete(id);

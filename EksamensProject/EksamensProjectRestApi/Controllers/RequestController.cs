@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using EksamensProject.Core.ApplicationService;
 using EksamensProject.Core.Entity;
 using EksamensProjectRestApi.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -20,6 +21,7 @@ namespace EksamensProjectRestApi.Controllers
         }
         // GET api/values
         [HttpGet]
+        [Authorize(Roles = "Administrator")]
         public ActionResult<IEnumerable<AllRequestDTO>> Get()
         {
             try
@@ -45,6 +47,7 @@ namespace EksamensProjectRestApi.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult<RequestDTO> Get(int id)
         {
             try
@@ -67,6 +70,7 @@ namespace EksamensProjectRestApi.Controllers
 
         // POST api/values
         [HttpPost]
+        [Authorize]
         public ActionResult<Request> Post([FromBody] Request request)
         {
             try
@@ -81,6 +85,7 @@ namespace EksamensProjectRestApi.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
+        [Authorize]
         public ActionResult<Request> Put(int id, [FromBody] Request request)
         {
             if (id != request.Id)
@@ -91,6 +96,7 @@ namespace EksamensProjectRestApi.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult<Request> Delete(int id)
         {
             var toRemove = _requestService.Delete(id);

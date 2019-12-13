@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using EksamensProject.Core.ApplicationService;
 using EksamensProject.Core.Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -47,6 +48,7 @@ namespace EksamensProjectRestApi.Controllers
 
         // POST api/values
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public ActionResult<Composition> Post([FromBody] Composition composition)
         {
             try
@@ -61,6 +63,7 @@ namespace EksamensProjectRestApi.Controllers
 
         // PUT api/values/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult<Composition> Put(int id, [FromBody] Composition composition)
         {
             if (id != composition.Id)
@@ -71,6 +74,7 @@ namespace EksamensProjectRestApi.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public ActionResult<Composition> Delete(int id)
         {
             var toRemove = _compositionService.Delete(id);

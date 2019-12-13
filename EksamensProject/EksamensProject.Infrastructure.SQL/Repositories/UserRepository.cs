@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EksamensProject.Infrastructure.SQL.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : IUserRepository<User>
     {
         readonly EksamensProjectContext _ctx;
 

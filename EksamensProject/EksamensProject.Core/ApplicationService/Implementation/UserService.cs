@@ -9,9 +9,9 @@ namespace EksamensProject.Core.ApplicationService.Implementation
 {
     public class UserService : IUserService
     {
-        readonly IUserRepository _userRepository;
+        readonly IUserRepository<User> _userRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository<User> userRepository)
         {
             _userRepository = userRepository;
         }

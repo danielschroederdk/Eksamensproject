@@ -1,4 +1,5 @@
 using System;
+using EksamensProject.Core.ApplicationService;
 using EksamensProject.Core.Entity;
 using Microsoft.EntityFrameworkCore.Internal;
 
@@ -6,23 +7,41 @@ namespace EksamensProject.Infrastructure.SQL
 {
     public class DbInitializer : IDbInitializer
     {
+        private IAuthenticationService _authenticationService;
+
+        public DbInitializer(IAuthenticationService authenticationService)
+        {
+            _authenticationService = authenticationService;
+        }
         public void Initialize(EksamensProjectContext context)
         {
             // Deletes and creates database
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
+            
+            // Being salty
+            string password = "1234";
+            byte[] passwordHashMax, passwordSaltMax, passwordHashThomas, passwordSaltThomas;
+            _authenticationService.CreatePasswordHash(password, out passwordHashMax, out passwordSaltMax);
+            _authenticationService.CreatePasswordHash(password, out passwordHashThomas, out passwordSaltThomas);
 
             var admin = new User()
             {
                 Name = "Max",
-                Email = "max@uldahl.dk"
+                Email = "max@uldahl.dk",
+                PasswordHash = passwordHashMax,
+                PasswordSalt = passwordSaltMax,
+                Role = Role.Admin
             };
             
             var user = new User()
             {
                 Name = "Thomas",
-                Email = "thomas@example.dk"
+                Email = "thomas@example.dk",
+                PasswordHash = passwordHashThomas,
+                PasswordSalt = passwordSaltThomas,
+                Role = Role.User
             };
 
             var style = new Style()

@@ -11,10 +11,10 @@ namespace EksamensProjectRestApi.Controllers
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        private IUserRepository _repository;
+        private IUserRepository<User> _repository;
         private IAuthenticationService _authenticationService;
 
-        public AuthenticationController(IUserRepository repos, IAuthenticationService authService)
+        public AuthenticationController(IUserRepository<User> repos, IAuthenticationService authService)
         {
             _repository = repos;
             _authenticationService = authService;        

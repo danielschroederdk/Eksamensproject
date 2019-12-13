@@ -19,12 +19,16 @@ namespace EksamensProjectRestApi.Controllers
         {
             _userService = userService;
         }
+        
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<AllUsersDTO>> Get()
+        [Authorize]
+        public ActionResult<IEnumerable<User>> Get()
         {
             try
             {
+                return _userService.GetUsers();
+                /*
                 var list = _userService.GetUsers();
                 var newList = new List<AllUsersDTO>();
 
@@ -34,10 +38,11 @@ namespace EksamensProjectRestApi.Controllers
                     {
                         Id = user.Id,
                         Name = user.Name,
-                        Email = user.Email
+                        Email = user.Email,
                     });
                 }
                 return newList;
+                */
             }
             catch (Exception e)
             {
@@ -55,7 +60,7 @@ namespace EksamensProjectRestApi.Controllers
             }
             catch (Exception e)
             {
-                return StatusCode(404, $"owner {id} not found");
+                return StatusCode(404, $"user {id} not found");
             }
         }
 

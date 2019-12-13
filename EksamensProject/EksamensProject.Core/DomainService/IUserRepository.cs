@@ -3,7 +3,7 @@ using EksamensProject.Core.Entity;
 
 namespace EksamensProject.Core.DomainService
 {
-    public interface IUserRepository
+    public interface IUserRepository<T>
     {
         User Create(User user);
         User ReadById(int id);

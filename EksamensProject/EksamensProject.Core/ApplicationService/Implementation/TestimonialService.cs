@@ -9,9 +9,9 @@ namespace EksamensProject.Core.ApplicationService.Implementation
     public class TestimonialService : ITestimonialService
     {
         readonly ITestimonialRepository _reviewRepository;
-        readonly IUserRepository _userRepository;
+        readonly IUserRepository<User> _userRepository;
 
-        public TestimonialService(ITestimonialRepository reviewRepository, IUserRepository userRepository)
+        public TestimonialService(ITestimonialRepository reviewRepository, IUserRepository<User> userRepository)
         {
             _reviewRepository = reviewRepository;
             _userRepository = userRepository;

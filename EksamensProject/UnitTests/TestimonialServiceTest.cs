@@ -22,7 +22,7 @@ namespace UnitTests
         [Fact]
         public void CreateNewTestimonialWithHeaderMissingThrowsException2()
         {
-            var userRepo = new Mock<IUserRepository>();
+            var userRepo = new Mock<IUserRepository<User>>();
             var reviewRepo = new Mock<ITestimonialRepository>();
             ITestimonialService reviewService = new TestimonialService(reviewRepo.Object, userRepo.Object);
 
@@ -40,7 +40,7 @@ namespace UnitTests
         [Fact]
         public void CreateNewTestimonialWithHeaderMissingThrowsException()
         {
-            var userRepo = new Mock<IUserRepository>();
+            var userRepo = new Mock<IUserRepository<User>>();
             userRepo.Setup(x => x.ReadById(It.IsAny<int>()))
                .Returns(new User(){Id = 1});
             
@@ -64,7 +64,7 @@ namespace UnitTests
         [Fact]
         public void CreateNewTestimonialWithBodyMissingThrowsException()
         {
-            var userRepo = new Mock<IUserRepository>();
+            var userRepo = new Mock<IUserRepository<User>>();
             userRepo.Setup(x => x.ReadById(It.IsAny<int>()))
                 .Returns(new User(){Id = 1});
             

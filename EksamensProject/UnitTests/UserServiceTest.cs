@@ -31,7 +31,7 @@ namespace UnitTests
         [InlineData("Max", "max@example.com")]
         public void CreateNewUserWorking_Test(string name, string email)
         {
-            var userRepo = new Mock<IUserRepository>();
+            var userRepo = new Mock<IUserRepository<User>>();
             IUserService service = new UserService(userRepo.Object);
             
             var user = service.CreateNewUser(name, email);
@@ -48,7 +48,7 @@ namespace UnitTests
         [InlineData("Max", "")]
         public void CreateNewUserMissingEmailThrowException(string name, string email)
         {
-            var userRepo = new Mock<IUserRepository>();
+            var userRepo = new Mock<IUserRepository<User>>();
             IUserService service = new UserService(userRepo.Object);
             
             var user = service.CreateNewUser(name, email);
@@ -61,7 +61,7 @@ namespace UnitTests
         [InlineData("", "max@example.com")]
         public void CreateNewUserMissingNameThrowException(string name, string email)
         {
-            var userRepo = new Mock<IUserRepository>();
+            var userRepo = new Mock<IUserRepository<User>>();
             IUserService service = new UserService(userRepo.Object);
             
             var user = service.CreateNewUser(name, email);
@@ -74,7 +74,7 @@ namespace UnitTests
         [InlineData("1234", "max@example.com")]
         public void CreateNewUserInvalidNameThrowException(string name, string email)
         {
-            var userRepo = new Mock<IUserRepository>();
+            var userRepo = new Mock<IUserRepository<User>>();
             IUserService service = new UserService(userRepo.Object);
             
             var user = service.CreateNewUser(name, email);
@@ -87,7 +87,7 @@ namespace UnitTests
         [InlineData("Max", "max@example.com")]
         public void CreateNewUserShouldCallUserRepoOnce(string name, string email)
         {
-            var userRepo = new Mock<IUserRepository>();
+            var userRepo = new Mock<IUserRepository<User>>();
             IUserService service = new UserService(userRepo.Object);
            
             service.CreateNewUser(name, email);
@@ -99,7 +99,7 @@ namespace UnitTests
         public void FindUserByIdUserFound()
         {
             var user = new User { Id = 1 };
-            var userRepo = new Mock<IUserRepository>();
+            var userRepo = new Mock<IUserRepository<User>>();
             userRepo.Setup(x => x.ReadById(It.IsAny<int>()))
                 .Returns(user);
 
@@ -111,7 +111,7 @@ namespace UnitTests
         [Fact]
         public void FindUserByIdUserNotFound()
         {
-            var userRepo = new Mock<IUserRepository>();
+            var userRepo = new Mock<IUserRepository<User>>();
           
             IUserService userService = new UserService(userRepo.Object);
            
@@ -138,7 +138,7 @@ namespace UnitTests
                     Email = "Thomas@example.com"
                 }
             };
-            var userRepo = new Mock<IUserRepository>();
+            var userRepo = new Mock<IUserRepository<User>>();
             
             userRepo.Setup(x => x.ReadAll())
                 .Returns(users);

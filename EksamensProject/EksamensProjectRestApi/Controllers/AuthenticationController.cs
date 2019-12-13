@@ -24,7 +24,7 @@ namespace EksamensProjectRestApi.Controllers
         [HttpPost]
         public ActionResult<User> Post([FromBody]LoginDTO model)
         {
-            var user = _repository.ReadAll().FirstOrDefault(u => u.Name == model.Username);
+            var user = _repository.ReadAll().FirstOrDefault(u => u.Name == model.Name);
 
             // check if username exists
             if (user == null)

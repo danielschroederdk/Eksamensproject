@@ -13,7 +13,7 @@ namespace EksamensProject.Core.Entity
         public List<Testimonial> Testimonials { get; set; }
         public List<Request> Requests { get; set; }
         
-        public Role Role;
+        public Role Role { get; set; }
         
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }

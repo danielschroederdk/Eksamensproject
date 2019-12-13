@@ -81,9 +81,10 @@ namespace EksamensProjectRestApi
             services.AddScoped<IRequestRepository, RequestRepository>();
             services.AddScoped<IRequestService, RequestService>();
             
-            //
+            
             // DbInitialized 
             services.AddTransient<IDbInitializer, DbInitializer>();
+            // AuthService injected
             services.AddSingleton<IAuthenticationService>(new AuthenticationService(secretBytes));
 
             services.AddCors(options =>
@@ -145,21 +146,21 @@ namespace EksamensProjectRestApi
                     var dbInitializer = ctx.GetService<IDbInitializer>();
                     dbInitializer.Initialize(ctx);
                     */
-                    
+
                     var services = scope.ServiceProvider;
                     var dbContext = services.GetService<EksamensProjectContext>();
                     var dbInitializer = services.GetService<IDbInitializer>();
                     dbInitializer.Initialize(dbContext);
-                    
-                    
                 }
             }
 
+            app.UseHsts();
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseAuthorization();
             
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }

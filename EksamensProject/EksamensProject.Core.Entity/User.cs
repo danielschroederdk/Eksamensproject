@@ -12,6 +12,10 @@ namespace EksamensProject.Core.Entity
         public String Email { get; set; }
         public List<Testimonial> Testimonials { get; set; }
         public List<Request> Requests { get; set; }
+        public Role Role;
+        
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
 
     }
 }

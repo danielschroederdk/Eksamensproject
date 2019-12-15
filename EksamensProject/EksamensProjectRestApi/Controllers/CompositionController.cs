@@ -40,7 +40,7 @@ namespace EksamensProjectRestApi.Controllers
             {
                return Ok(_compositionService.FindCompositionById(id));
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return StatusCode(404, $"Composition {id} not found");
             }

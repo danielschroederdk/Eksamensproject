@@ -56,7 +56,7 @@ namespace EksamensProjectRestApi.Controllers
             {
                return Ok(_userService.FindUserById(id));
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return StatusCode(404, $"user {id} not found");
             }

@@ -61,7 +61,7 @@ namespace EksamensProjectRestApi.Controllers
                    TestimonialBody = testimonial.TestimonialBody
                });
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return StatusCode(404, $"Request {id} not found");
             }

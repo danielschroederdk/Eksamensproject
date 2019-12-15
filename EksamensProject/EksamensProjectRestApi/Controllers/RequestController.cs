@@ -62,7 +62,7 @@ namespace EksamensProjectRestApi.Controllers
                    RequestBody = request.RequestBody
                });
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return StatusCode(404, $"Request {id} not found");
             }

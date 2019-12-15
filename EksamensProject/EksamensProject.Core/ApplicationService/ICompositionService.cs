@@ -6,7 +6,7 @@ namespace EksamensProject.Core.ApplicationService
 {
     public interface ICompositionService
     {
-        Composition CreateNewComposition(String name, String year, double duration, Tempo tempo);
+        Composition CreateNewComposition(String name, String year, double duration, Tempo tempo, Style style);
         Composition CreateComposition(Composition composition);
         Composition FindCompositionById(int id);
         Composition Delete(int id);

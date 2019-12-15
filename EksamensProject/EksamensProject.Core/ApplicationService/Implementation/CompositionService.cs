@@ -16,14 +16,15 @@ namespace EksamensProject.Core.ApplicationService.Implementation
             _compositionRepository = compositionRepository;
         }
         
-        public Composition CreateNewComposition(string name, String year, double duration, Tempo tempo)
+        public Composition CreateNewComposition(string name, String year, double duration, Tempo tempo, Style style)
         {
             var newComposition = new Composition()
             {
                 Name = name,
                 Duration = duration,
                 Year = year,
-                Tempo = tempo
+                Tempo = tempo,
+                Style = style
             };
                 
             _compositionRepository.Create(newComposition);

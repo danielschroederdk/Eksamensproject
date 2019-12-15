@@ -9,15 +9,20 @@ namespace EksamensProject.Core.ApplicationService.Implementation
     public class RequestService : IRequestService
     {
         private readonly IRequestRepository _requestRepository;
+        readonly IUserRepository<User> _userRepository;
 
-        public RequestService(IRequestRepository requestRepository)
+
+        public RequestService(IRequestRepository requestRepository, IUserRepository<User> userRepository)
         {
             _requestRepository = requestRepository;
+            _userRepository = userRepository;
         }
 
 
-        public Request CreateNewRequest(User user, string header, string body)
+        public Request CreateNewRequest(int userId, string header, string body)
         {
+            var user = _userRepository.ReadById(userId);
+            
             var newRequest = new Request()
             {
                 User = user,

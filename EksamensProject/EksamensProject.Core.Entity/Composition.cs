@@ -6,7 +6,7 @@ namespace EksamensProject.Core.Entity
     {
         public int Id { get; set; }
         public String Name { get; set; }
-        public String  Year { get; set; }
+        public String Year { get; set; }
         public Double Duration { get; set; } 
         public Tempo Tempo { get; set; }
         public Style Style { get; set; }

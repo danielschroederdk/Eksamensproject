@@ -6,7 +6,7 @@ namespace EksamensProject.Core.ApplicationService
 {
     public interface IRequestService
     {
-        Request CreateNewRequest(User user, String header, String body);
+        Request CreateNewRequest(int userId, String header, String body);
         Request CreateRequest(Request request);
         Request FindRequestById(int id);
         Request Delete(int id);

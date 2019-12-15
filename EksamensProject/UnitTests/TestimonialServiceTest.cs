@@ -29,7 +29,7 @@ namespace UnitTests
 
         }
         [Fact]
-        public void CreateNewTestimonialWithHeaderMissingThrowsException2()
+        public void CreateNewTestimonialWithHeaderMissingThrowsException()
         {
             var userRepo = new Mock<IUserRepository<User>>();
             var reviewRepo = new Mock<ITestimonialRepository>();
@@ -109,6 +109,7 @@ namespace UnitTests
             var output = reviewService.FindReviewById(1);
             Assert.True(testimonial.Equals(output));
         }
+        
         [Fact]
         public void FindTestimonialByIdTestimonialNotFound()
         {

@@ -8,6 +8,7 @@ using EksamensProject.Core.DomainService;
 using EksamensProject.Core.Entity;
 using EksamensProject.Infrastructure.SQL;
 using EksamensProject.Infrastructure.SQL.Repositories;
+using FluentValidation;
 using FluentValidation.TestHelper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
@@ -19,13 +20,8 @@ namespace UnitTests
 {
     public class UserServiceTest
     {
-        private readonly ITestOutputHelper _testOutputHelper;
         private readonly UserValidator _validator = new UserValidator();
-
-        public UserServiceTest(ITestOutputHelper testOutputHelper)
-        {
-            _testOutputHelper = testOutputHelper;
-        }
+        
         [Fact]
         public void CreateNullUserThrowsException()
         {
@@ -49,9 +45,6 @@ namespace UnitTests
             
             result.ShouldNotHaveValidationErrorFor(u => u.Name);
             result.ShouldNotHaveValidationErrorFor(u => u.Email);
-
-            Assert.Equal(user.Name, name);
-            Assert.Equal(user.Email,email);
         }
         
         [Theory]
@@ -86,6 +79,7 @@ namespace UnitTests
         {
             var userRepo = new Mock<IUserRepository<User>>();
             IUserService service = new UserService(userRepo.Object);
+            
             
             var user = service.CreateNewUser(name, email);
             var result = _validator.TestValidate(user);
@@ -143,7 +137,10 @@ namespace UnitTests
             IUserService userService = new UserService(userRepo.Object);
             userService.CreateUser(user);
 
+            userRepo.Setup(x => x.ReadById(It.IsAny<int>()))
+                .Returns(user);
             userRepo.Setup(r => r.Delete(It.IsAny<int>()));
+            
             userService.Delete(user.Id);
             
             userRepo.Verify(r => r.Delete(user.Id));

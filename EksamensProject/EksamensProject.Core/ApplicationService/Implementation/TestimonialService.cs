@@ -43,7 +43,7 @@ namespace EksamensProject.Core.ApplicationService.Implementation
         public Testimonial FindReviewById(int id)
         {
             return _reviewRepository.ReadById(id) == null
-                ? throw new InvalidDataException("Review not found")
+                ? throw new InvalidDataException("Testimonial not found")
                 : _reviewRepository.ReadById(id);           }
 
         public Testimonial Delete(int id)

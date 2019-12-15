@@ -17,6 +17,7 @@ namespace EksamensProject.Core.ApplicationService.Implementation
         }
         public User CreateNewUser(string name, string email)
         {
+            
             var newUser = new User()
             {
                 Name = name,
@@ -28,6 +29,10 @@ namespace EksamensProject.Core.ApplicationService.Implementation
 
         public User CreateUser(User user)
         {
+            if (user == null)
+            {
+                throw new InvalidDataException("User cannot be null");
+            }
             return _userRepository.Create(user);
         }
 

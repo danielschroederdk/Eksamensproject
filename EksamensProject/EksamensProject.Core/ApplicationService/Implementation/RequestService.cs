@@ -32,6 +32,10 @@ namespace EksamensProject.Core.ApplicationService.Implementation
 
         public Request CreateRequest(Request request)
         {
+            if (request == null)
+            {
+                throw new InvalidDataException("Request cannot be null");
+            }
             return _requestRepository.Create(request);
         }
 

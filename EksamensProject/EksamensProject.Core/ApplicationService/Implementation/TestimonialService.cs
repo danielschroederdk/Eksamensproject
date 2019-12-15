@@ -33,6 +33,10 @@ namespace EksamensProject.Core.ApplicationService.Implementation
         
         public Testimonial CreateReview(Testimonial review)
         {
+            if (review == null)
+            {
+                throw new InvalidDataException("Testimonial cannot be null");
+            }
             return _reviewRepository.Create(review);
         }
 

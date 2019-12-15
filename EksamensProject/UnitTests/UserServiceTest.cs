@@ -26,7 +26,17 @@ namespace UnitTests
         {
             _testOutputHelper = testOutputHelper;
         }
+        [Fact]
+        public void CreateNullUserThrowsException()
+        {
+            var userRepo = new Mock<IUserRepository<User>>();
+            IUserService service = new UserService(userRepo.Object);
+            
+            Exception ex = Assert.Throws<InvalidDataException>(() => 
+                service.CreateUser(null));
+            Assert.Equal("User cannot be null", ex.Message);
 
+        }
         [Theory]
         [InlineData("Max", "max@example.com")]
         public void CreateNewUserWorking_Test(string name, string email)
@@ -112,7 +122,6 @@ namespace UnitTests
         public void FindUserByIdUserNotFound()
         {
             var userRepo = new Mock<IUserRepository<User>>();
-          
             IUserService userService = new UserService(userRepo.Object);
            
             Exception ex = Assert.Throws<InvalidDataException>(() => 
@@ -123,26 +132,21 @@ namespace UnitTests
         [Fact]
         public void DeleteUserById()
         {
-            var users = new List<User>
+            var user = new User()
             {
-                new User()
-                {
-                    Id = 1,
-                    Name = "Max",
-                    Email = "max@example.com"
-                },
-                new User()
-                {
-                    Id = 2,
-                    Name = "Thomas",
-                    Email = "Thomas@example.com"
-                }
+                Id = 1,
+                Name = "Max",
+                Email = "max@example.com"
             };
+
             var userRepo = new Mock<IUserRepository<User>>();
+            IUserService userService = new UserService(userRepo.Object);
+            userService.CreateUser(user);
+
+            userRepo.Setup(r => r.Delete(It.IsAny<int>()));
+            userService.Delete(user.Id);
             
-            userRepo.Setup(x => x.ReadAll())
-                .Returns(users);
-            
+            userRepo.Verify(r => r.Delete(user.Id));
 
         }
         

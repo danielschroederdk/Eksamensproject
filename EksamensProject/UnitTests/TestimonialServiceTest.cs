@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using EksamensProject.Core.ApplicationService;
 using EksamensProject.Core.ApplicationService.Implementation;
 using EksamensProject.Core.DomainService;
@@ -12,12 +13,20 @@ namespace UnitTests
 {
     public class ReviewServiceTest
     {
-        private readonly ITestOutputHelper _testOutputHelper;
         private readonly ReviewValidator _validator = new ReviewValidator();
-
-        public ReviewServiceTest(ITestOutputHelper testOutputHelper)
+        
+        [Fact]
+        public void CreateNullTestimonialThrowsException()
         {
-            _testOutputHelper = testOutputHelper;
+            var testimonialRepo = new Mock<ITestimonialRepository>();
+            var userRepo = new Mock<IUserRepository<User>>();
+
+            ITestimonialService service = new TestimonialService(testimonialRepo.Object, userRepo.Object);
+
+            Exception ex = Assert.Throws<InvalidDataException>(() => 
+                service.CreateReview(null));
+            Assert.Equal("Testimonial cannot be null", ex.Message);
+
         }
         [Fact]
         public void CreateNewTestimonialWithHeaderMissingThrowsException2()
@@ -33,8 +42,6 @@ namespace UnitTests
 
             var result = _validator.TestValidate(review);
             result.ShouldHaveValidationErrorFor(u => u.TestimonialHeader);
-            result.ShouldNotHaveValidationErrorFor(u => u.User);
-            result.ShouldNotHaveValidationErrorFor(u => u.TestimonialBody);
 
         }
         [Fact]
@@ -57,8 +64,6 @@ namespace UnitTests
             
             var result = _validator.TestValidate(review);
             result.ShouldHaveValidationErrorFor(u => u.TestimonialHeader);
-            result.ShouldNotHaveValidationErrorFor(u => u.User);
-            result.ShouldNotHaveValidationErrorFor(u => u.TestimonialBody);
 
         }
         [Fact]
@@ -80,8 +85,6 @@ namespace UnitTests
             reviewService.CreateReview(review);
             
             var result = _validator.TestValidate(review);
-            result.ShouldNotHaveValidationErrorFor(u => u.TestimonialHeader);
-            result.ShouldNotHaveValidationErrorFor(u => u.User);
             result.ShouldHaveValidationErrorFor(u => u.TestimonialBody);
         }
         

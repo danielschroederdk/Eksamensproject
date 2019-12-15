@@ -32,6 +32,10 @@ namespace EksamensProject.Core.ApplicationService.Implementation
 
         public Composition CreateComposition(Composition composition)
         {
+            if (composition == null)
+            {
+                throw new InvalidDataException("Composition cannot be null");
+            }
             return _compositionRepository.Create(composition);
         }
 

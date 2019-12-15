@@ -1,0 +1,8 @@
+language: csharp
+solution: EksamensProject.sln
+mono: none
+dotnet: 3.0
+script:
+- cd EksamensProject
+- dotnet build
+- dotnet test

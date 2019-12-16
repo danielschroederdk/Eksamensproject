@@ -3,6 +3,7 @@ using System.IO;
 using EksamensProject.Core.ApplicationService.Implementation;
 using EksamensProject.Core.DomainService;
 using EksamensProject.Core.Entity;
+using FluentValidation;
 using FluentValidation.TestHelper;
 using Moq;
 using Xunit;
@@ -75,6 +76,32 @@ namespace UnitTests
             var result = _validator.TestValidate(composition);
          
             result.ShouldHaveValidationErrorFor(c => c.Duration);
+        }
+        
+        [Fact]
+        public void CreateCompositionWithDurationOfZero()
+        {
+            var compositionRepo = new Mock<ICompositionRepository>();
+            var service = new CompositionService(compositionRepo.Object);
+         
+            var composition = new Composition()
+            {
+                Name = "Vivaldi",
+                Tempo = new Tempo(),
+                Year = "1720",
+                Comment = "Yay",
+                Duration = 0,
+                Style = new Style(),
+                URL = "url",
+                PictureURL = "url"
+            };
+            
+            service.CreateComposition(composition);
+
+            var result = _validator.TestValidate(composition);
+         
+            result.ShouldHaveValidationErrorFor(c => c.Duration);
+            
         }
         
         [Fact]

@@ -37,13 +37,31 @@ namespace EksamensProject.Infrastructure.SQL
             
             var user = new User()
             {
-                Name = "Thomas",
+                Name = "Hans",
                 Email = "thomas@example.dk",
                 PasswordHash = passwordHashThomas,
                 PasswordSalt = passwordSaltThomas,
                 Role = Role.User
             };
-
+            
+            var user2 = new User()
+            {
+                Name = "Sebastian",
+                Email = "thomas@example.dk",
+                PasswordHash = passwordHashThomas,
+                PasswordSalt = passwordSaltThomas,
+                Role = Role.User
+            };
+            
+            var user3 = new User()
+            {
+                Name = "Wolffgang",
+                Email = "thomas@example.dk",
+                PasswordHash = passwordHashThomas,
+                PasswordSalt = passwordSaltThomas,
+                Role = Role.User
+            };
+            
             var style = new Style()
             {
                 Era = "New time",
@@ -103,16 +121,24 @@ namespace EksamensProject.Infrastructure.SQL
             
             var testimonial = new Testimonial()
             {
-                User = admin,
-                TestimonialHeader = "Excellent",
-                TestimonialBody = "NICE"
+                User = user,
+                TestimonialHeader = "Simply beautiful!",
+                TestimonialBody = "We are very pleased with the audio landscaped created by Max.\n" +
+                                  "An absolute elevation of a scenematic experience"
             };
             
             var testimonial2 = new Testimonial()
             {
-                User = user,
-                TestimonialHeader = "Excellent",
-                TestimonialBody = "NICE"
+                User = user2,
+                TestimonialHeader = "Astonishing and creative",
+                TestimonialBody = "The attention to detail and realism is impressive to say the least"
+            };
+            
+            var testimonial3 = new Testimonial()
+            {
+                User = user3,
+                TestimonialHeader = "A pleasure to work with",
+                TestimonialBody = "Max has been extremely useful in the making of our project"
             };
             
             var request = new Request()
@@ -133,6 +159,7 @@ namespace EksamensProject.Infrastructure.SQL
             context.Compositions.Add(composition3);
             context.Testimonials.Add(testimonial);
             context.Testimonials.Add(testimonial2);
+            context.Testimonials.Add(testimonial3);
             context.Requests.Add(request);
             context.SaveChanges();
 

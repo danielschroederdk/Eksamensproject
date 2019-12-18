@@ -81,6 +81,9 @@ namespace EksamensProjectRestApi
             services.AddScoped<IRequestRepository, RequestRepository>();
             services.AddScoped<IRequestService, RequestService>();
             
+            // Style injected
+            services.AddScoped<IStylesRepository, StylesRepository>();
+            services.AddScoped<IStyleService, StyleService>();
             
             // DbInitialized 
             services.AddTransient<IDbInitializer, DbInitializer>();

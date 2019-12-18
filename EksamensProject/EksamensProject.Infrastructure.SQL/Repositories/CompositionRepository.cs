@@ -29,12 +29,13 @@ namespace EksamensProject.Infrastructure.SQL.Repositories
 
         public IEnumerable<Composition> ReadAll()
         {
-            return _ctx.Compositions.ToList();        
+            return _ctx.Compositions.Include(i => i.Style).Include(i => i.Tempo).ToList();        
         }
 
         public Composition Update(Composition compositionUpdate)
         {
             _ctx.Entry(compositionUpdate).State = EntityState.Modified;
+            _ctx.Entry(compositionUpdate).Reference(c => c.Style).IsModified = true;
             _ctx.SaveChanges();
             return compositionUpdate;
             

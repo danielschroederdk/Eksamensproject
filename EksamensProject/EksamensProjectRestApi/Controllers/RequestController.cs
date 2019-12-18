@@ -61,7 +61,6 @@ namespace EksamensProjectRestApi.Controllers
                     RequestHeader = request.RequestHeader,
                     UserId = request.User.Id
                 });
-                return Ok(_requestService.FindRequestById(id));
             }
             catch (Exception)
             {
@@ -91,7 +90,7 @@ namespace EksamensProjectRestApi.Controllers
         {
             if (id != request.Id)
                 return BadRequest("ID does not coincide");
-            
+
             return Ok(_requestService.UpdateRequest(request));
         }
 

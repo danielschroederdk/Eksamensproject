@@ -50,6 +50,12 @@ namespace EksamensProject.Infrastructure.SQL
                 Name = "Wauw"
             };
             
+            var style2 = new Style()
+            {
+                Era = "Old school",
+                Name = "Old School"
+            };
+            
             var tempo = new Tempo()
             {
                 TempoMarking = TempoMarking.Adagietto,
@@ -119,6 +125,9 @@ namespace EksamensProject.Infrastructure.SQL
             
             // Adding
             context.Users.Add(admin);
+            context.Styles.Add(style);
+            context.Styles.Add(style2);
+
             context.Compositions.Add(composition);
             context.Compositions.Add(composition2);
             context.Compositions.Add(composition3);

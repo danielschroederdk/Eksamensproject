@@ -20,14 +20,14 @@ namespace EksamensProject.Infrastructure.SQL
             modelBuilder.Entity<User>()
                 .HasMany(user => user.Requests)
                 .WithOne(request => request.User);
+            
 
             modelBuilder.Entity<Composition>()
                 .HasOne(c => c.Style);
             
             modelBuilder.Entity<Composition>()
                 .HasOne(c => c.Tempo);
-
-          
+            
 
             //add style relation
         }
@@ -36,6 +36,7 @@ namespace EksamensProject.Infrastructure.SQL
         public DbSet<Composition> Compositions { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
         public DbSet<Request> Requests { get; set; }
+
 
     }
 }

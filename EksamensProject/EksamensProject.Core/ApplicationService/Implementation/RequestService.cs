@@ -9,7 +9,7 @@ namespace EksamensProject.Core.ApplicationService.Implementation
     public class RequestService : IRequestService
     {
         private readonly IRequestRepository _requestRepository;
-        readonly IUserRepository<User> _userRepository;
+        private readonly IUserRepository<User> _userRepository;
 
 
         public RequestService(IRequestRepository requestRepository, IUserRepository<User> userRepository)

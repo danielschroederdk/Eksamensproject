@@ -44,7 +44,8 @@ namespace EksamensProject.Core.ApplicationService.Implementation
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Name)
+                new Claim(ClaimTypes.Name, user.Name),
+                new Claim("id", user.Id.ToString())
             };
 
             if (user.Role == Role.Admin)

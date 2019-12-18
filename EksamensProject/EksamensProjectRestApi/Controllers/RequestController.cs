@@ -35,6 +35,7 @@ namespace EksamensProjectRestApi.Controllers
                     {
                         Id = request.Id,
                         RequestHeader = request.RequestHeader
+                        
                     });
                 }
                 return Ok(newList);
@@ -50,17 +51,17 @@ namespace EksamensProjectRestApi.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult<RequestDTO> Get(int id)
         {
+            var request = _requestService.FindRequestById(id);
             try
-            { 
-                var request = _requestService.FindRequestById(id);
-                
-               return Ok(new RequestDTO()
-               {
-                   Id = request.Id,
-                   userId = request.User.Id,
-                   RequestHeader = request.RequestHeader,
-                   RequestBody = request.RequestBody
-               });
+            {
+                return Ok(new RequestDTO()
+                {
+                    Id = request.Id,
+                    RequestBody = request.RequestBody,
+                    RequestHeader = request.RequestHeader,
+                    UserId = request.User.Id
+                });
+                return Ok(_requestService.FindRequestById(id));
             }
             catch (Exception)
             {
@@ -71,11 +72,11 @@ namespace EksamensProjectRestApi.Controllers
         // POST api/values
         [HttpPost]
         [Authorize]
-        public ActionResult<Request> Post([FromBody] Request request)
+        public ActionResult<Request> Post([FromBody] RequestDTO request)
         {
             try
             {
-                return Ok(_requestService.CreateRequest(request));
+                return Ok(_requestService.CreateNewRequest(request.UserId, request.RequestHeader, request.RequestBody));
             }
             catch (Exception e)
             {

@@ -68,6 +68,7 @@ namespace UnitTests
             var requestRepo = new Mock<IRequestRepository>();
             var requestService = new RequestService(requestRepo.Object, userRepo.Object);
 
+            
             var request = new Request()
             {
                 User = null,

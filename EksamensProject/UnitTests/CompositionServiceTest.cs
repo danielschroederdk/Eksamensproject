@@ -104,31 +104,6 @@ namespace UnitTests
             
         }
         
-        [Fact]
-        public void CreateCompositionWithNullTempo()
-        {
-            var compositionRepo = new Mock<ICompositionRepository>();
-            var service = new CompositionService(compositionRepo.Object);
-         
-            var composition = service.CreateNewComposition("Vivaldi", "1720", 2.2, null, new Style());
-                     
-            var result = _validator.TestValidate(composition);
-         
-            result.ShouldHaveValidationErrorFor(c => c.Tempo);
-        }
-        
-        [Fact]
-        public void CreateCompositionWithNullStyle()
-        {
-            var compositionRepo = new Mock<ICompositionRepository>();
-            var service = new CompositionService(compositionRepo.Object);
-         
-            var composition = service.CreateNewComposition("Vivaldi", "1720", 2.2, new Tempo(), null);
-                     
-            var result = _validator.TestValidate(composition);
-         
-            result.ShouldHaveValidationErrorFor(c => c.Style);
-        }
         
         [Fact]
         public void FindCompositionByIdCompositionFound()

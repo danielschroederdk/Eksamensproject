@@ -37,7 +37,7 @@ namespace EksamensProject.Infrastructure.SQL
             
             var user = new User()
             {
-                Name = "Hans",
+                Name = "Thomas",
                 Email = "thomas@example.dk",
                 PasswordHash = passwordHashThomas,
                 PasswordSalt = passwordSaltThomas,

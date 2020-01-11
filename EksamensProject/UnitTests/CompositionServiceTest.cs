@@ -34,7 +34,11 @@ namespace UnitTests
             var compositionRepo = new Mock<ICompositionRepository>();
             var service = new CompositionService(compositionRepo.Object);
 
-            var composition = service.CreateNewComposition("", "1720", 2.2, new Tempo(), new Style());
+            var composition = service.CreateNewComposition("",
+                "1720",
+                2.2,
+                new Tempo(),
+                new Style());
             
             var result = _validator.TestValidate(composition);
 
@@ -91,6 +95,32 @@ namespace UnitTests
                 Year = "1720",
                 Comment = "Yay",
                 Duration = 0,
+                Style = new Style(),
+                URL = "url",
+                PictureURL = "url"
+            };
+            
+            service.CreateComposition(composition);
+
+            var result = _validator.TestValidate(composition);
+         
+            result.ShouldHaveValidationErrorFor(c => c.Duration);
+            
+        }
+        
+        [Fact]
+        public void CreateCompositionWithDurationNegative()
+        {
+            var compositionRepo = new Mock<ICompositionRepository>();
+            var service = new CompositionService(compositionRepo.Object);
+         
+            var composition = new Composition()
+            {
+                Name = "Vivaldi",
+                Tempo = new Tempo(),
+                Year = "1720",
+                Comment = "Yay",
+                Duration = -1,
                 Style = new Style(),
                 URL = "url",
                 PictureURL = "url"

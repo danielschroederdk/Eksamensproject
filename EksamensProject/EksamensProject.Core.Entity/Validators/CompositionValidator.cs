@@ -12,6 +12,5 @@ namespace EksamensProject.Core.Entity
                 .WithMessage("Duration must be a positive number");
             RuleFor(composition => composition.Year).NotEmpty().WithMessage("Date is required");
         }
-        
     }
 }

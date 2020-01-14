@@ -70,11 +70,11 @@ namespace EksamensProjectRestApi.Controllers
         // POST api/values
         [HttpPost]
         [Authorize]
-        public ActionResult<Testimonial> Post([FromBody] Testimonial review)
+        public ActionResult<Testimonial> Post([FromBody] TestimonialDTO testimonial)
         {
             try
             {
-                return Ok(_reviewService.CreateReview(review));
+                return Ok(_reviewService.CreateNewReview(testimonial.UserId, testimonial.TestimonialHeader, testimonial.TestimonialBody));
             }
             catch (Exception e)
             {

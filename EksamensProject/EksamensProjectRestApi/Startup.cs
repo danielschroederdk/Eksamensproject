@@ -94,8 +94,8 @@ namespace EksamensProjectRestApi
             {
                 options.AddPolicy("AllowSpecificOrigin",
                     builder => builder
-                        //.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
-                        .WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod()
+                        .WithOrigins("https://eksamensprojekt-379f8.firebaseapp.com").AllowAnyHeader().AllowAnyMethod()
+                        .WithOrigins("https://eksamensproject-admin.firebaseapp.com").AllowAnyHeader().AllowAnyMethod()
                 );
             });
             services.AddMvc(opt =>
@@ -139,7 +139,7 @@ namespace EksamensProjectRestApi
         {
             app.UseCors("AllowSpecificOrigin");
 
-            if (Enviroment.IsDevelopment())
+            //if (Enviroment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 using (var scope = app.ApplicationServices.CreateScope())
